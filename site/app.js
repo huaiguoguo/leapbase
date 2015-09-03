@@ -1,4 +1,5 @@
 'use strict';
+var debug = require('debug')('app')
 var express = require('express');
 var session = require('express-session');
 var fs = require('fs');
@@ -60,9 +61,9 @@ function setup(cbSetup) {
     try {
         siteSetting = require('./setting').setting;
     } catch (e) {
-        console.log('use default setting');
+        debug('use default setting');
     }
-    //console.log('site setting:', siteSetting);
+    debug('site setting:', siteSetting);
     app.setting = _.extend(app.setting, siteSetting);
     // setup swig as view engine
     app.server.engine('html', cons.swig);
@@ -100,7 +101,7 @@ function setupModules(app, cbSetup) {
     var modulePath = path.join(app.setting.server_path, app.setting.app_modules_name);
     fs.readdir(modulePath, function(error, files) {
         if (error) {
-            console.log('Error in setupModules:', error);
+            debug('Error in setupModules:', error);
             process.exit();
         } else {
             for (var i = 0; i < files.length; i++) {

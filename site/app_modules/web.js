@@ -1,3 +1,5 @@
+'use strict';
+var debug = require('debug')('app');
 var util = require('util');
 var tool = require('leaptool');
 
@@ -12,6 +14,7 @@ module.exports = function(app) {
     block.page = tool.object(require('basepage')(app, moduleName, block.data));
     
     block.page.getAbout = function(req, res) {
+        debug('page call: getAbout');
         var page = { title:'about' };
         res.render(moduleName + '/about', { page:page });
     };

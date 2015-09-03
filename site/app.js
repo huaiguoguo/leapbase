@@ -1,5 +1,5 @@
 'use strict';
-var debug = require('debug')('app')
+var debug = require('debug')('app');
 var express = require('express');
 var session = require('express-session');
 var fs = require('fs');
@@ -16,7 +16,7 @@ var tool = require('leaptool');
 var app = {};
 
 app.db = null;
-app.engine = require('webEngine')(app);
+app.engine = require('web-engine')(app);
 app.cb = function(error, docs, info, req, res, callback) {
     if (callback) {
         if (error) {

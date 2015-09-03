@@ -29,5 +29,6 @@ export LEAPBASE_DATABASE_TYPE=mongo
 export LEAPBASE_DATABASE_HOST=localhost
 export LEAPBASE_DATABASE_PORT=27017
 ```
+
 For more information, see site/support/install.txt.
 

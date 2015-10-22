@@ -3,9 +3,17 @@ Leapbase framework
 
 A NodeJS framework for building web appliction
 
-
-Get Started
+Run webpack
 -----------
+
+```
+cd site
+webpack
+cd ..
+```
+
+Run webserver
+-------------
 
 ```
 npm install 

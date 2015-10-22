@@ -48,7 +48,7 @@
 	__webpack_require__(1)
 	$().ready(function() {
 	    console.log('in webpack test page');
-	    var testOutput1 = 'current time: ' + __webpack_require__(5);
+	    var testOutput1 = 'current time is: ' + __webpack_require__(5);
 	    $('.content1').html(testOutput1);
 	});
 

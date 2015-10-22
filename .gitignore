@@ -4,5 +4,7 @@ node_modules/
 npm-debug.log
 **/dist/*.js
 **/dist/*.css
+**/*-bundle.js
+**/*-bundle.js.map
 !**/dist/.gitkeep
 !site/node_modules

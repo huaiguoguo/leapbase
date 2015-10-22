@@ -1,10 +1,15 @@
+'user restrict'
+var path = require('path');
+
 module.exports = {
+    context: path.join(__dirname, 'public/script/web'),
     entry: {
-        webpack: './public/script/web/webpack.js',
-        webpack2: './public/script/web/webpack2.js',
+        webpack: './webpack.js',
+        webpack2: './webpack2.js',
     },
     output: {
-        filename: './public/script/web/[name]-bundle.js'
+        path: path.join(__dirname, 'public/script/web'),
+        filename: './[name]-bundle.js'
     },
     devtool: 'source-map',
     module: {

@@ -8,7 +8,8 @@ Run webpack
 
 ```
 cd site
-webpack
+webpack -p // for production
+webpack -w // for development
 cd ..
 ```
 

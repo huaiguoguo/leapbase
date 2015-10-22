@@ -1,7 +1,10 @@
 module.exports = {
-    entry: './public/script/web/webpack.js',
+    entry: {
+        webpack: './public/script/web/webpack.js',
+        webpack2: './public/script/web/webpack2.js',
+    },
     output: {
-        filename: './public/script/web/webpack-bundle.js'
+        filename: './public/script/web/[name]-bundle.js'
     },
     devtool: 'source-map',
     module: {

@@ -17,18 +17,12 @@ var app = {};
 
 app.db = null;
 app.engine = require('web-engine')(app);
+
 app.cb = function(error, docs, info, req, res, callback) {
+    error && console.log('Error:', error);
     if (callback) {
-        if (error) {
-            console.log('Error:', error);
-            callback(error, docs, info, req, res);
-        } else {
-            callback(error, docs, info, req, res);
-        }
+        callback(error, docs, info, req, res);
     } else {
-        if (error) {
-            app.error(error);
-        }
         var result = {
             error: error,
             docs: docs,

@@ -1,46 +1,48 @@
 {
-    "name": "leapbase",
-    "version": "0.2.0",
-    "description": "leapbase",
-    "repository": "",
-    "main": "js/app.js",
-    "dependencies": {
-        "express": "~4.0",
-        "express-session": "*",
-        "mongodb": "*",
-        "underscore": "*",
-        "static-favicon": "*",
-        "cookie-parser": "*",
-        "body-parser": "*",
-        "debug": "*",
-        "consolidate": "*",
-        "moment": "*",
-        "async": "*",
-        "swig": "*",
-        "validate.js": "*",
-        "compression": "*",
-        "bootstrap": "*",
-        "jquery": "*",
-        "font-awesome": "*",
-        "multer": "*",
-        "flux": "*",
-        "react": "*"
-    },
-    "devDependencies": {
-        "browserify": "^6.2.0",
-        "envify": "^3.0.0",
-        "reactify": "^0.15.2",
-        "uglify-js": "~2.4.15",
-        "watchify": "^2.1.1"
-    },
-    "scripts": {
-        "start": "node ./site/bin/www"
-    },
-    "author": "Yue Liu",
-    "browserify": {
-        "transform": [
-            "reactify",
-            "envify"
-        ]
-    }
+  "name": "leapbase",
+  "version": "0.2.0",
+  "description": "leapbase",
+  "repository": "",
+  "main": "js/app.js",
+  "dependencies": {
+    "async": "^0.9.2",
+    "body-parser": "~1.0.0",
+    "bootstrap": "^3.3.5",
+    "compression": "~1.0.8",
+    "consolidate": "^0.10.0",
+    "cookie-parser": "~1.0.1",
+    "debug": "^2.0.0",
+    "express": "^4.2.0",
+    "express-session": "^1.12.1",
+    "flux": "^2.1.1",
+    "font-awesome": "^4.3.0",
+    "jquery": "^2.1.4",
+    "kerberos": "0.0.17",
+    "moment": "^2.7.0",
+    "mongodb": "^2.0.48",
+    "morgan": "~1.0.0",
+    "multer": "^1.1.0",
+    "react": "^0.14.3",
+    "static-favicon": "~1.0.0",
+    "swig": "^1.4.2",
+    "underscore": "^1.6.0",
+    "validate.js": "~0.4.0"
+  },
+  "devDependencies": {
+    "browserify": "^6.2.0",
+    "envify": "^3.0.0",
+    "reactify": "^0.15.2",
+    "uglify-js": "~2.4.15",
+    "watchify": "^2.1.1"
+  },
+  "scripts": {
+    "start": "node ./site/bin/www"
+  },
+  "author": "Yue Liu",
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  }
 }

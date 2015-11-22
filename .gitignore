@@ -7,4 +7,5 @@ npm-debug.log
 **/*-bundle.js
 **/*-bundle.js.map
 !**/dist/.gitkeep
+site/setting.js
 !site/node_modules

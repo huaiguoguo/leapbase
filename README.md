@@ -41,3 +41,15 @@ export LEAPBASE_DATABASE_PORT=27017
 
 For more information, see site/support/install.txt.
 
+
+Webpack
+-------
+
+npm install css-loader style-loader --save-dev
+
+npm install -g webpack-dev-server
+
+under site foler, run webpack
+
+test page: http://localhost:8080/web/page/webpack
+

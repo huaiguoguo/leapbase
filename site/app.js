@@ -4,7 +4,7 @@ var express = require('express');
 var session = require('express-session');
 var fs = require('fs');
 var path = require('path');
-var favicon = require('static-favicon');
+var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -68,7 +68,7 @@ function setup(cbSetup) {
     app.server.use(compression());
     app.server.use(logger('dev'));
     app.server.use(bodyParser.json());
-    app.server.use(bodyParser.urlencoded());
+    app.server.use(bodyParser.urlencoded({ extended: true }));
     app.server.use(cookieParser());
     app.server.use(session({
         secret:'mykey123456',

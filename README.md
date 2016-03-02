@@ -29,7 +29,7 @@ Setting
 
 The web server setting is controlled by environment variables.
 
-The setting can be specified by a site/setting.js file as well.
+The setting can be specified by a site/setting.js file 
 An example file is available at site/support/setting.js.
 
 ```

@@ -8,3 +8,4 @@ npm-debug.log
 **/*-bundle.js.map
 !**/dist/.gitkeep
 !site/node_modules
+site/setting.js

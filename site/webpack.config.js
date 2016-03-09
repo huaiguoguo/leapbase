@@ -5,8 +5,7 @@ var webpack = require('webpack');
 module.exports = {
     context: path.join(__dirname, 'public/script/web'),
     entry: {
-        webpack: './webpack.js',
-        webpack2: './webpack2.js',
+        webpack: './webpack.js'
     },
     output: {
         path: path.join(__dirname, 'public/script/web'),

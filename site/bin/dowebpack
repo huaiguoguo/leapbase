@@ -1,3 +1,2 @@
 # go to site folder
-
 webpack -w --devtool source-map public/script/web/webpack.js public/script/web/webpack-bundle.js 

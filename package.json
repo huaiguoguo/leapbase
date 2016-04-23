@@ -26,7 +26,8 @@
     "serve-favicon": "^2.3.0",
     "swig": "^1.4.2",
     "underscore": "^1.6.0",
-    "validate.js": "~0.9.0"
+    "validate.js": "~0.9.0",
+    "webpack": "^1.12.14"
   },
   "scripts": {
     "start": "node ./site/bin/www"

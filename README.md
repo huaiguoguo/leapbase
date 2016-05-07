@@ -1,7 +1,7 @@
 Leapbase framework
 ==================
 
-A NodeJS framework for building web appliction
+A NodeJS framework for building web application
 
 Run webpack
 -----------

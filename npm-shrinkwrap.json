@@ -77,10 +77,17 @@
       "from": "commander@2.3.0",
       "resolved": "https://registry.npmjs.org/commander/-/commander-2.3.0.tgz"
     },
-    "compressible": {
-      "version": "2.0.7",
-      "from": "compressible@>=2.0.7 <2.1.0",
-      "resolved": "https://registry.npmjs.org/compressible/-/compressible-2.0.7.tgz"
+    "compression": {
+      "version": "1.6.2",
+      "from": "compression@latest",
+      "resolved": "https://registry.npmjs.org/compression/-/compression-1.6.2.tgz",
+      "dependencies": {
+        "compressible": {
+          "version": "2.0.8",
+          "from": "compressible@>=2.0.8 <2.1.0",
+          "resolved": "https://registry.npmjs.org/compressible/-/compressible-2.0.8.tgz"
+        }
+      }
     },
     "concat-stream": {
       "version": "1.5.1",
@@ -236,30 +243,6 @@
       "from": "express-session@>=1.12.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/express-session/-/express-session-1.13.0.tgz"
     },
-    "fbemitter": {
-      "version": "2.0.2",
-      "from": "fbemitter@>=2.0.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/fbemitter/-/fbemitter-2.0.2.tgz",
-      "dependencies": {
-        "fbjs": {
-          "version": "0.7.2",
-          "from": "fbjs@>=0.6.0 <0.7.0||>=0.7.1 <0.8.0",
-          "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.7.2.tgz"
-        }
-      }
-    },
-    "fbjs": {
-      "version": "0.1.0-alpha.7",
-      "from": "fbjs@0.1.0-alpha.7",
-      "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.1.0-alpha.7.tgz",
-      "dependencies": {
-        "whatwg-fetch": {
-          "version": "0.9.0",
-          "from": "whatwg-fetch@>=0.9.0 <0.10.0",
-          "resolved": "https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-0.9.0.tgz"
-        }
-      }
-    },
     "finalhandler": {
       "version": "0.4.1",
       "from": "finalhandler@0.4.1",
@@ -304,11 +287,6 @@
       "version": "0.4.13",
       "from": "iconv-lite@0.4.13",
       "resolved": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.13.tgz"
-    },
-    "immutable": {
-      "version": "3.8.1",
-      "from": "immutable@>=3.7.4 <4.0.0",
-      "resolved": "https://registry.npmjs.org/immutable/-/immutable-3.8.1.tgz"
     },
     "inherits": {
       "version": "2.0.1",
@@ -427,6 +405,11 @@
       "from": "moment@>=2.7.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/moment/-/moment-2.13.0.tgz"
     },
+    "morgan": {
+      "version": "1.7.0",
+      "from": "morgan@latest",
+      "resolved": "https://registry.npmjs.org/morgan/-/morgan-1.7.0.tgz"
+    },
     "ms": {
       "version": "0.7.1",
       "from": "ms@0.7.1",
@@ -436,11 +419,6 @@
       "version": "1.1.0",
       "from": "multer@>=1.1.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/multer/-/multer-1.1.0.tgz"
-    },
-    "nan": {
-      "version": "2.3.3",
-      "from": "nan@>=2.3.0 <2.4.0",
-      "resolved": "https://registry.npmjs.org/nan/-/nan-2.3.3.tgz"
     },
     "negotiator": {
       "version": "0.6.1",

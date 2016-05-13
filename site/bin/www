@@ -2,10 +2,9 @@
 var debug = require('debug')('www');
 
 require('../app')(function(app) {
-    var portNumber = app.setting.http_port;
-    debug('setting:', app.setting);
-    app.server.set('port', portNumber);
-    var webServer = app.server.listen(app.server.get('port'), function() {
-        console.log('Express server listening on port ' + webServer.address().port);
-    });
+  debug('setting:', app.setting);
+  app.server.set('port', app.setting.http_port);
+  var webServer = app.server.listen(app.server.get('port'), function() {
+    console.log('Express server listening on port ' + webServer.address().port);
+  });
 });

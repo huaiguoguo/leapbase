@@ -1,7 +1,12 @@
+.header-container {
+  background-color: #f8f8f8;
+}
+
 .body-container {
-    min-height: 420px;
+  padding-top: 10px;
+  min-height: 450px;
 }
 
 .footer-container {
-    margin-top: 20px;
+  margin-top: 20px;
 }

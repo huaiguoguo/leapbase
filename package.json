@@ -1,13 +1,13 @@
 {
-  "name": "leapease",
+  "name": "leapbase",
   "version": "0.2.0",
-  "description": "leap on minimal web framework with ease",
+  "description": "leapbase minimal web framework",
   "license": "MIT",
   "author": "leapon",
   "main": "js/app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/leapon/leapease.git"
+    "url": "git://github.com/leapon/leapbase.git"
   },
   "dependencies": {
     "async": "^2.0.0-rc.4",

@@ -28,8 +28,8 @@ Docker Commands
 ---------------
 ```
 eval $(docker-machine env default) // for docker in Windows/MacOSX
-docker build --tag=leapon/leapease -f ./Dockerfile . // build docker image for leapease
-docker push leapon/leapease // publish docker image to docker hub
+docker build --tag=leapon/leapbase -f ./Dockerfile . // build docker image for leapbase
+docker push leapon/leapbase // publish docker image to docker hub
 
-docker run --name=leapease -p 8080:8080 -t -d leapon/leapease  // run docker image
+docker run --name=leapbase -p 8080:8080 -t -d leapon/leapbase  // run docker image
 ```

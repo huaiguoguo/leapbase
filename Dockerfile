@@ -1,4 +1,4 @@
-# Dockerfile for creating a docker image for the leapease project
+# Dockerfile for creating a docker image for the leapbase project
 FROM node
 MAINTAINER leapon
 
@@ -11,7 +11,7 @@ WORKDIR /opt/nodejs
 RUN npm install
 
 # Expose environment variables
-ENV LEAPEASE_HTTP_PORT=8080
+ENV LEAPBASE_HTTP_PORT=8080
 
 # Expose the container port
 EXPOSE 8080

@@ -13,9 +13,7 @@ var compression = require('compression')
 var _ = require('underscore');
 var tool = require('leaptool');
 
-var app = {};
-
-app.db = null;
+var app = { db:null };
 
 app.cb = function(error, docs, info, req, res, callback) {
   error && console.log('Error:', error);
@@ -57,13 +55,14 @@ function setup(cbSetup) {
   app.server = express();
   // read setting
   app.setting = tool.getDefaultSetting(__dirname);
+  debug('setting:', app.setting);
   var siteSetting = null;
   try {
     siteSetting = require('./setting').setting;
+    debug('setting file:', siteSetting);
   } catch (e) {
-    debug('use default setting');
+    debug('setting file is absent');
   }
-  debug('site setting:', siteSetting);
   app.setting = _.extend(app.setting, siteSetting);
   // setup swig as view engine
   app.server.engine('html', cons.swig);
@@ -116,6 +115,7 @@ function setupModules(app, cbSetup) {
 
 // setup web server properties
 function setupServer(app, cbSetup) {
+  debug('setup server');
   // catch 404 and forward to error handler
   app.server.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -140,6 +140,7 @@ function setupServer(app, cbSetup) {
       error: {}
     });
   });
+  // invoke callback to continue setup
   cbSetup && cbSetup(app);
 }
 

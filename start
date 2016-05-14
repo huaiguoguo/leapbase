@@ -1,0 +1,2 @@
+# start with debug on, with exclusion
+DEBUG=*,-app*,-express* npm start

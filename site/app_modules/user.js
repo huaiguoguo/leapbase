@@ -139,9 +139,9 @@ module.exports = function(app) {
 
   // page
   block.page.login = function(req, res) {
-    var page = app.getPage(req);
-    page.redirect = req.query.url || '';
-    page.title = 'User Login';
+    var page = app.getPage(req, { title:'login' });
+    //page.redirect = req.query.url || '';
+    //page.title = 'User Login';
     //page.controller = "users";
     res.render('user/login', { page:page });
   };

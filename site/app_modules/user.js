@@ -83,6 +83,7 @@ module.exports = function(app) {
     var parameter = tool.getReqParameter(req);
     // user email is lower case
     parameter.email = parameter.email.toLowerCase();
+    debug('add user:', parameter);
     tool.setReqParameter(req, parameter);
     var condition = {email: parameter.email};
     var filter = {}
@@ -175,15 +176,20 @@ module.exports = function(app) {
 
   block.page.signupPost = function(req, res) {
     debug('user signup posted');
+    var page = app.getPage(req, {});
+    page.title = 'User Signup';
+    res.render('user/signup', { page:page });
+
+    /*
     var parameter = tool.getReqParameter(req);
     var invite_code = parameter.invite_code;
     if (invite_code != app.setting.invite.code) {
-      var text = 'Signup failed';
-      info = {
-        message: 'Invite code is wrong'
-      };
-      app.renderInfoPage(new Error(text), null, info, req, res);
+      var message = 'Signup failed - incorrect invite code';
+      app.renderInfoPage(new Error(message), null, { message:message }, req, res);
     } else {
+      debug('passed invite code check, add user');
+      app.renderInfoPage(null, null, { message:'add user'}, req, res);
+
       block.data.addUser(req, res, null, function(error, docs, info) {
         if (error) {
           app.renderInfoPage(error, docs, info, req, res);
@@ -194,6 +200,7 @@ module.exports = function(app) {
         }
       });
     }
+    */
   };
 
   block.page.logout = function(req, res) {

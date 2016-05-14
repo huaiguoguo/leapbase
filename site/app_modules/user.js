@@ -184,13 +184,21 @@ module.exports = function(app) {
       app.renderInfoPage(new Error('Signup Error'), null, { message:message }, req, res);
     } else {
 
+      block.data.addUser(req, res, null, function(error, docs, info) {
+        if (error) {
+          app.renderInfoPage(error, docs, info, req, res);
+        } else {
+          var user = docs && docs[0];
+          var nextUrl = parameter.redirect || '/';
+          res.redirect(nextUrl);
+        }
+      });
 
-
-
-          // debug
-          var page = app.getPage(req, {});
-          page.title = 'User Signup';
-          res.render('user/signup', { page:page });
+      /*
+      var page = app.getPage(req, {});
+      page.title = 'User Signup';
+      res.render('user/signup', { page:page });
+      */
 
     }
 

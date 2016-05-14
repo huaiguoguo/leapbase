@@ -167,13 +167,14 @@ module.exports = function(app) {
   };
 
   block.page.signup = function(req, res) {
-    var page = app.getPage(req);
+    debug('user signup');
+    var page = app.getPage(req, {});
     page.title = 'User Signup';
-    page.controller = "users";
     res.render('user/signup', { page:page });
   };
 
   block.page.signupPost = function(req, res) {
+    debug('user signup posted');
     var parameter = tool.getReqParameter(req);
     var invite_code = parameter.invite_code;
     if (invite_code != app.setting.invite.code) {

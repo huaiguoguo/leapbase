@@ -175,10 +175,25 @@ module.exports = function(app) {
   };
 
   block.page.signupPost = function(req, res) {
-    debug('user signup posted');
-    var page = app.getPage(req, {});
-    page.title = 'User Signup';
-    res.render('user/signup', { page:page });
+    var parameter = tool.getReqParameter(req);
+    debug('user signup posted - parameter:', parameter);
+    var invite_code = parameter.invite_code;
+    if (invite_code != app.setting.invite_code) {
+      debug('entered invite code, ' + invite_code + ', does not match');
+      var message = 'Incorrect invite code';
+      app.renderInfoPage(new Error('Signup Error'), null, { message:message }, req, res);
+    } else {
+
+
+
+
+          // debug
+          var page = app.getPage(req, {});
+          page.title = 'User Signup';
+          res.render('user/signup', { page:page });
+
+    }
+
 
     /*
     var parameter = tool.getReqParameter(req);

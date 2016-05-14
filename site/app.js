@@ -13,7 +13,9 @@ var compression = require('compression')
 var _ = require('underscore');
 var tool = require('leaptool');
 
-var app = { db:null };
+var app = {};
+app.db = null;
+app.engine = require('web_engine')(app);
 
 app.cb = function(error, docs, info, req, res, callback) {
   error && console.log('Error:', error);

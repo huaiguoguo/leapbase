@@ -1,5 +1,5 @@
 'use strict';
-var debug = require('debug')('app');
+var debug = require('debug')('service');
 var tool = require('leaptool');
 
 module.exports = function(app) {
@@ -9,19 +9,21 @@ module.exports = function(app) {
     group: 'app',
     model: null
   };
-  
+
   block.data = tool.object(require('basedata')(app, module_name));
   block.page = tool.object(require('basepage')(app, module_name, block.data));
-  
+
   // data section
   block.data.generateRandomNumber = function(req, res) {
-    var callback = arguments[3] || null; 
+    debug('data.generateRandomNumber');
+    var callback = arguments[3] || null;
     //var parameter = tool.getReqParameter(req);
     app.cb(null, [], { value:Math.random() }, req, res, callback);
   };
 
   // page section
   block.page.showService = function(req, res) {
+    debug('page.showService');
     block.data.generateRandomNumber(req, res, null, function(error, docs, info) {
       var page = app.getPage(req, {
         module_name: module_name,
@@ -35,7 +37,7 @@ module.exports = function(app) {
 
   // data route
   app.server.get('/data/service/generate_random_number', block.data.generateRandomNumber);
-  
+
   // page route
   app.server.get('/service', block.page.showService);
 

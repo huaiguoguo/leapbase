@@ -22,11 +22,6 @@
       "from": "array-flatten@1.1.1",
       "resolved": "https://registry.npmjs.org/array-flatten/-/array-flatten-1.1.1.tgz"
     },
-    "asap": {
-      "version": "2.0.3",
-      "from": "asap@>=2.0.3 <2.1.0",
-      "resolved": "https://registry.npmjs.org/asap/-/asap-2.0.3.tgz"
-    },
     "async": {
       "version": "2.0.0-rc.4",
       "from": "async@>=2.0.0-rc.4 <3.0.0",
@@ -59,7 +54,7 @@
     },
     "bson": {
       "version": "0.4.23",
-      "from": "bson@>=0.4.23 <0.5.0",
+      "from": "bson@latest",
       "resolved": "https://registry.npmjs.org/bson/-/bson-0.4.23.tgz"
     },
     "busboy": {
@@ -335,11 +330,6 @@
       "from": "jquery@>=2.1.4 <3.0.0",
       "resolved": "https://registry.npmjs.org/jquery/-/jquery-2.2.3.tgz"
     },
-    "js-tokens": {
-      "version": "1.0.3",
-      "from": "js-tokens@>=1.0.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-1.0.3.tgz"
-    },
     "lodash": {
       "version": "4.12.0",
       "from": "lodash@>=4.3.0 <5.0.0",
@@ -436,11 +426,6 @@
       "version": "0.6.1",
       "from": "negotiator@0.6.1",
       "resolved": "https://registry.npmjs.org/negotiator/-/negotiator-0.6.1.tgz"
-    },
-    "node-fetch": {
-      "version": "1.5.2",
-      "from": "node-fetch@>=1.0.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/node-fetch/-/node-fetch-1.5.2.tgz"
     },
     "object-assign": {
       "version": "3.0.0",
@@ -630,11 +615,6 @@
       "version": "1.1.0",
       "from": "vary@>=1.1.0 <1.2.0",
       "resolved": "https://registry.npmjs.org/vary/-/vary-1.1.0.tgz"
-    },
-    "whatwg-fetch": {
-      "version": "1.0.0",
-      "from": "whatwg-fetch@>=0.10.0",
-      "resolved": "https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-1.0.0.tgz"
     },
     "window-size": {
       "version": "0.1.0",

@@ -86,7 +86,7 @@ function setup(cbSetup) {
   app.server.use(express.static(path.join(__dirname, app.setting.public_name)));
   // setup database connection
   if (app.setting.database && app.setting.database.type) {
-    var Database = require(app.setting.database.type + '-database');
+    var Database = require(app.setting.database.type + '_db');
     app.db = new Database(app, function() {
       setupModules(app, cbSetup);
     });

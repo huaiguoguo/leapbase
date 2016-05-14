@@ -38,3 +38,5 @@ node_modules
 # Keep node_modules under site/
 !site/node_modules
 
+# site/setting.js is private
+site/setting.js

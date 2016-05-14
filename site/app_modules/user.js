@@ -9,6 +9,7 @@ module.exports = function(app) {
   var block = {
     app: app
   };
+
   block.data = tool.object(require('basedata')(app, module_name));
   block.page = tool.object(require('basepage')(app, module_name, block.data));
 
@@ -67,11 +68,14 @@ module.exports = function(app) {
       type: 'string'
     }
   };
+
+  /*
   block.listFields = [
     { name:'username', display:'Username', flex:2, sort:'asc' },
     { name:'email', display:'Email', flex:3 },
     { name:'status', display:'Status', flex:1 }
   ];
+  */
 
   // data
   block.data.addUser = function(req, res) {
@@ -133,27 +137,12 @@ module.exports = function(app) {
   };
 
   // page
-  block.page.getIndex = function(req, res) {
-    block.data.getWeb(req, res, null, function(error, docs, info) {
-      var page = app.getPage(req);
-      res.render('user/index', { page:page });
-    });
-  };
-
   block.page.login = function(req, res) {
     var page = app.getPage(req);
     page.redirect = req.query.url || '';
     page.title = 'User Login';
-    page.controller = "users";
+    //page.controller = "users";
     res.render('user/login', { page:page });
-  };
-
-  block.page.loginLinkedIn = function(req, res) {
-    var page = app.getPage(req);
-    page.redirect = req.query.url || '';
-    page.title = 'User Login via LinkedIn';
-    page.linkedinKey = app.setting.linkedin && app.setting.linkedin.key || '';
-    res.render('user/login-linkedin', { page:page });
   };
 
   block.page.loginPost = function(req, res) {
@@ -187,7 +176,7 @@ module.exports = function(app) {
   block.page.signupPost = function(req, res) {
     var parameter = tool.getReqParameter(req);
     var invite_code = parameter.invite_code;
-    if ( invite_code != app.setting.invite.code ) {
+    if (invite_code != app.setting.invite.code) {
       var text = 'Signup failed';
       info = {
         message: 'Invite code is wrong'
@@ -212,6 +201,22 @@ module.exports = function(app) {
     }
     var nextUrl = '/';
     res.redirect(nextUrl);
+  };
+
+  /*
+  block.page.getIndex = function(req, res) {
+    block.data.getWeb(req, res, null, function(error, docs, info) {
+      var page = app.getPage(req);
+      res.render('user/index', { page:page });
+    });
+  };
+
+  block.page.loginLinkedIn = function(req, res) {
+    var page = app.getPage(req);
+    page.redirect = req.query.url || '';
+    page.title = 'User Login via LinkedIn';
+    page.linkedinKey = app.setting.linkedin && app.setting.linkedin.key || '';
+    res.render('user/login-linkedin', { page:page });
   };
 
   block.page.getProfile = function(req, res) {
@@ -325,15 +330,17 @@ module.exports = function(app) {
       res.redirect('/users/list');
     });
   };
+  */
 
   // page route
+  app.server.get('/user/login', block.page.login);
+  app.server.post('/user/login', block.page.loginPost);
+  app.server.get('/user/signup', block.page.signup);
+  app.server.post('/user/signup', block.page.signupPost);
+  app.server.get('/user/logout', block.page.logout);
+
   /*
   app.server.get('/users', block.page.getIndex);
-  app.server.get('/users/login', block.page.login);
-  app.server.post('/users/login', block.page.loginPost);
-  app.server.get('/users/signup', block.page.signup);
-  app.server.post('/users/signup', block.page.signupPost);
-  app.server.get('/users/logout', block.page.logout);
   app.server.get('/users/:username/profile', block.page.getProfile);
   app.server.get('/users/password/reset', block.page.resetPassword);
   app.server.post('/users/password/reset_post', block.page.resetPasswordPost);
@@ -345,6 +352,6 @@ module.exports = function(app) {
 
   app.server.get('/users/login/linkedin', block.page.loginLinkedIn);
   */
-  
+
   return block;
 };

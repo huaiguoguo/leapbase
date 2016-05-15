@@ -234,6 +234,11 @@ module.exports = function(app) {
     res.redirect(nextUrl);
   };
 
+  block.page.getProfile = function(req, res) {
+    var page = app.getPage(req, { title:'User Profile' });
+    res.render('user/profile', { page:page });
+  };
+
   /*
   block.page.getIndex = function(req, res) {
     block.data.getWeb(req, res, null, function(error, docs, info) {
@@ -369,6 +374,7 @@ module.exports = function(app) {
   app.server.get('/user/signup', block.page.signup);
   app.server.post('/user/signup', block.page.signupPost);
   app.server.get('/user/logout', block.page.logout);
+  app.server.get('/user/profile', block.page.getProfile);
 
   /*
   app.server.get('/users', block.page.getIndex);

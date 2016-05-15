@@ -140,9 +140,7 @@ module.exports = function(app) {
   // page
   block.page.login = function(req, res) {
     var page = app.getPage(req, { title:'login' });
-    //page.redirect = req.query.url || '';
-    //page.title = 'User Login';
-    //page.controller = "users";
+    page.redirect = req.query.url || '';
     res.render('user/login', { page:page });
   };
 
@@ -374,6 +372,8 @@ module.exports = function(app) {
   app.server.get('/user/signup', block.page.signup);
   app.server.post('/user/signup', block.page.signupPost);
   app.server.get('/user/logout', block.page.logout);
+
+  app.server.all('/user/profile', block.page.checkLogin);
   app.server.get('/user/profile', block.page.getProfile);
 
   /*

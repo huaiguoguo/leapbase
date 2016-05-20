@@ -1,4 +1,4 @@
-Leapease framework
+Leapbase framework
 ==================
 
 A minimum framework for building web appliction
@@ -24,12 +24,3 @@ git config credential.helper store
 ```
 
 
-Docker Commands
----------------
-```
-eval $(docker-machine env default) // for docker in Windows/MacOSX
-docker build --tag=leapon/leapbase -f ./Dockerfile . // build docker image for leapbase
-docker push leapon/leapbase // publish docker image to docker hub
-
-docker run --name=leapbase -p 8080:8080 -t -d leapon/leapbase  // run docker image
-```

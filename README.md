@@ -12,6 +12,7 @@ npm install
 npm start
 ```
 
+<<<<<<< HEAD
 
 Git Setup
 ---------
@@ -24,12 +25,13 @@ git config credential.helper store
 ```
 
 
-Docker Commands
----------------
+Git Setup
+---------
 ```
-eval $(docker-machine env default) // for docker in Windows/MacOSX
-docker build --tag=leapon/leapbase -f ./Dockerfile . // build docker image for leapbase
-docker push leapon/leapbase // publish docker image to docker hub
+git config user.name $GIT_USER_NAME
+git config user.email $GIT_USER_EMAIL
 
-docker run --name=leapbase -p 8080:8080 -t -d leapon/leapbase  // run docker image
+git config credential.helper 'cache --timeout=3600'
+git config credential.helper store
 ```
+

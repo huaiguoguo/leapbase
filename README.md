@@ -25,4 +25,3 @@ git config credential.helper store
 git config --list
 ```
 
-

@@ -16,22 +16,20 @@ module.exports = function(app) {
   block.model = {
     username: {
       type: 'string',
-      optional: true
+      required: true
     },
     firstname: {
-      type: 'string',
-      optional: true
+      type: 'string'
     },
     lastname: {
-      type: 'string',
-      optional: true
+      type: 'string'
     },
     email: {
       type: 'string',
       subtype: {
         type: 'email'
       },
-      optional: false,
+      required: true,
       option: {
         unique: true
       }
@@ -48,8 +46,8 @@ module.exports = function(app) {
         type: 'password'
       }
     },
-    is_admin: {
-      type: 'boolean'
+    api_token: {
+      type: 'string' // jwt token containing use id
     },
     status: {
       type: 'string',

@@ -84,6 +84,37 @@ function setup(cbSetup) {
     cookie: { maxAge: 120 * 60 * 1000 }  //session expires in 120 minutes
   }));
   app.server.use(express.static(path.join(__dirname, app.setting.public_name)));
+  
+  // DEBUG
+  // middleware for api token check
+  var apiRoutes = express.Router();
+  apiRoutes.use(function(req, res, next) {
+    // check header or url parameters or post parameters for token
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    debug('check api token:', token);
+    // decode token
+    if (token) {
+      // verifies secret and checks exp
+      jwt.verify(token, app.get('superSecret'), function(err, decoded) {      
+        if (err) {
+          return res.json({ success: false, message: 'Failed to authenticate token.' });    
+        } else {
+          // if everything is good, save to request for use in other routes
+          req.decoded = decoded;    
+          next();
+        }
+      });
+    } else {
+      // if there is no token, return 403
+      return res.status(403).send({ 
+          success: false, 
+          message: 'No token provided.' 
+      });
+    }
+  });
+  app.server.get('/data', apiRoutes);
+  // END OF DEBUG
+  
   // setup database connection
   if (app.setting.database && app.setting.database.type) {
     var Database = require(app.setting.database.type + '_db');

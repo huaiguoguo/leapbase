@@ -134,7 +134,7 @@ module.exports = function(app) {
       app.cb(error, user, info, req, res, callback);
     })
   };
-
+  
   // page
   block.page.login = function(req, res) {
     var page = app.getPage(req, { title:'login' });

@@ -50,10 +50,13 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-
         {% if page.user == null %}
+        <a class="btn btn-login" href="/user/signup" role="button">
+          <!-- <span class="glyphicon glyphicon-log-in"></span> -->
+          <span class="btn-signup-text">Signup</span>
+        </a>
         <a class="btn btn-login" href="/user/login" role="button">
-          <span class="glyphicon glyphicon-log-in"></span>
+          <!-- <span class="glyphicon glyphicon-log-in"></span> -->
           <span class="btn-login-text"> Login</span>
         </a>
         {% else %}

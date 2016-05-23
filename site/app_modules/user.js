@@ -102,8 +102,10 @@ module.exports = function(app) {
     user.username = user.username || user.email;
     user.salt = Math.round(100000000 * Math.random());
     user.password = tool.hash(user.password + user.salt);
+    user.api_token = tool.encodeToken({ user:user.username }, app.setting.token_secret);
     block.data.add(req, res, user, function(error, docs, info) {
       var user = docs && docs[0];
+      debug('user created:', JSON.stringify(user));
       if (req.session) {
         req.session.user = user;
       }
@@ -363,7 +365,7 @@ module.exports = function(app) {
     });
   };
   */
-
+  
   // page route
   app.server.get('/user/login', block.page.login);
   app.server.post('/user/login', block.page.loginPost);

@@ -13,6 +13,7 @@ module.exports = function(app) {
   block.data = tool.object(require('basedata')(app, module_name));
   block.page = tool.object(require('basepage')(app, module_name, block.data));
 
+  // make sure token is valid
   block.data.checkToken = function(req, res, next) {
     if (req.session && req.session.user) {
       next(); // no need for token check if user is logged in already
@@ -37,6 +38,11 @@ module.exports = function(app) {
         });
       }
     }
+  };
+
+  // make sure logged in user has access to route
+  block.data.checkAccess = function(req, res, next) {
+    
   };
 
   // site admin page

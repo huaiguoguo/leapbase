@@ -85,40 +85,12 @@ function setup(cbSetup) {
   }));
   app.server.use(express.static(path.join(__dirname, app.setting.public_name)));
 
-  // DEBUG
   // middleware for api token check
   var apiRoutes = express.Router();
   apiRoutes.use(function(req, res, next) {
-    if (req.session && req.session.user) {
-      // no need for token check if user is logged in already
-      next();
-    } else {
-      // check header or url parameters or post parameters for token
-      var token = req.body.token || req.query.token || req.headers['x-access-token'];
-      // decode token
-      if (token) {
-        // verifies secret and checks exp
-        jwt.verify(token, app.setting.token_secret, function(err, decoded) {
-          if (err) {
-            return res.json({ success: false, message: 'Failed to authenticate token.' });
-          } else {
-            console.log('token decoded:', decoded);
-            req.decoded = decoded; // save decoded info in req
-            next();
-          }
-        });
-      } else {
-        // if there is no token, return 403
-        return res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
-      }
-    }
+      app.module.admin.data.checkToken(req, res, next);
   });
   app.server.get('/data/*', apiRoutes);
-  //app.server.get('/data/api', apiRoutes);
-  // END OF DEBUG
 
   // setup database connection
   if (app.setting.database && app.setting.database.type) {

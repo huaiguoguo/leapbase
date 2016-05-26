@@ -1,5 +1,6 @@
 var debug = require('debug')('admin');
 var util = require('util');
+var jwt = require('jsonwebtoken');
 var tool = require('leaptool');
 
 module.exports = function(app) {
@@ -11,6 +12,32 @@ module.exports = function(app) {
   };
   block.data = tool.object(require('basedata')(app, module_name));
   block.page = tool.object(require('basepage')(app, module_name, block.data));
+
+  block.data.checkToken = function(req, res, next) {
+    if (req.session && req.session.user) {
+      next(); // no need for token check if user is logged in already
+    } else {
+      // check header or url parameters or post parameters for token
+      var token = req.body.token || req.query.token || req.headers['x-access-token'];
+      if (token) {
+        jwt.verify(token, app.setting.token_secret, function(err, decoded) {
+          if (err) {
+            return res.json({ success: false, message: 'Invalid token' });
+          } else {
+            debug('api token check - decoded token value:', decoded);
+            req.decoded = decoded; // save decoded info in req
+            next();
+          }
+        });
+      } else {
+        // if there is no token, return 403
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided'
+        });
+      }
+    }
+  };
 
   // site admin page
   block.page.getAdminPage = function(req, res) {

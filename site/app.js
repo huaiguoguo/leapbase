@@ -84,6 +84,14 @@ function setup(cbSetup) {
     cookie: { maxAge: 120 * 60 * 1000 }  //session expires in 120 minutes
   }));
   app.server.use(express.static(path.join(__dirname, app.setting.public_name)));
+
+  // middleware for api token check
+  var apiRoutes = express.Router();
+  apiRoutes.use(function(req, res, next) {
+      app.module.admin.data.checkToken(req, res, next);
+  });
+  app.server.get('/data/*', apiRoutes);
+
   // setup database connection
   if (app.setting.database && app.setting.database.type) {
     var Database = require(app.setting.database.type + '_db');

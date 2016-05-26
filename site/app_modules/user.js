@@ -16,22 +16,20 @@ module.exports = function(app) {
   block.model = {
     username: {
       type: 'string',
-      optional: true
+      required: true
     },
     firstname: {
-      type: 'string',
-      optional: true
+      type: 'string'
     },
     lastname: {
-      type: 'string',
-      optional: true
+      type: 'string'
     },
     email: {
       type: 'string',
       subtype: {
         type: 'email'
       },
-      optional: false,
+      required: true,
       option: {
         unique: true
       }
@@ -48,8 +46,14 @@ module.exports = function(app) {
         type: 'password'
       }
     },
-    is_admin: {
-      type: 'boolean'
+    api_token: {
+      type: 'string' // jwt token containing use id
+    },
+    roles: {
+      type: 'array',
+      subtype: {
+        type:'string'
+      }
     },
     status: {
       type: 'string',
@@ -83,6 +87,7 @@ module.exports = function(app) {
     var parameter = tool.getReqParameter(req);
     // user email is lower case
     parameter.email = parameter.email.toLowerCase();
+    parameter.roles = parameter.role ? [parameter.role] : [];
     debug('add user:', parameter);
     tool.setReqParameter(req, parameter);
     var condition = {email: parameter.email};
@@ -104,8 +109,10 @@ module.exports = function(app) {
     user.username = user.username || user.email;
     user.salt = Math.round(100000000 * Math.random());
     user.password = tool.hash(user.password + user.salt);
+    user.api_token = tool.encodeToken({ user:user.username }, app.setting.token_secret);
     block.data.add(req, res, user, function(error, docs, info) {
       var user = docs && docs[0];
+      debug('user created:', JSON.stringify(user));
       if (req.session) {
         req.session.user = user;
       }
@@ -175,13 +182,24 @@ module.exports = function(app) {
   block.page.signupPost = function(req, res) {
     var parameter = tool.getReqParameter(req);
     debug('user signup posted - parameter:', parameter);
+
     var invite_code = parameter.invite_code;
-    if (invite_code != app.setting.invite_code) {
+    var user_role = '';
+    switch (parameter.invite_code) {
+      case app.setting.invite_code_user:
+        user_role = 'user';
+        break;
+      case app.setting.invite_code_admin:
+        user_role = 'admin';
+        break;
+    }
+
+    if (user_role === '') {
       debug('entered invite code, ' + invite_code + ', does not match');
       var message = 'Incorrect invite code';
       app.renderInfoPage(new Error('Signup Error'), null, { message:message }, req, res);
     } else {
-
+      tool.setReqParameter(req, { role:user_role });
       block.data.addUser(req, res, null, function(error, docs, info) {
         if (error) {
           app.renderInfoPage(error, docs, info, req, res);

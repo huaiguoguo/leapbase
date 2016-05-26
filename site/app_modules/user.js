@@ -49,6 +49,12 @@ module.exports = function(app) {
     api_token: {
       type: 'string' // jwt token containing use id
     },
+    roles: {
+      type: 'array',
+      subtype: {
+        type:'string'
+      }
+    },
     status: {
       type: 'string',
       values: ['active', 'inactive']
@@ -136,7 +142,7 @@ module.exports = function(app) {
       app.cb(error, user, info, req, res, callback);
     })
   };
-  
+
   // page
   block.page.login = function(req, res) {
     var page = app.getPage(req, { title:'login' });
@@ -365,7 +371,7 @@ module.exports = function(app) {
     });
   };
   */
-  
+
   // page route
   app.server.get('/user/login', block.page.login);
   app.server.post('/user/login', block.page.loginPost);

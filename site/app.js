@@ -78,7 +78,7 @@ function setup(cbSetup) {
   app.server.use(bodyParser.urlencoded({ extended: true }));
   app.server.use(cookieParser());
   app.server.use(session({
-    secret:'mykey123456',
+    secret: app.setting.session_secret,
     saveUninitialized: true,
     resave: true,
     cookie: { maxAge: 120 * 60 * 1000 }  //session expires in 120 minutes
@@ -89,6 +89,9 @@ function setup(cbSetup) {
   var apiRoutes = express.Router();
   apiRoutes.use(function(req, res, next) {
       app.module.admin.data.checkToken(req, res, next);
+  });
+  apiRoutes.use(function(req, res, next) {
+      app.module.admin.data.checkAccess(req, res, next);
   });
   app.server.get('/data/*', apiRoutes);
 

@@ -21,13 +21,22 @@ module.exports = function(app) {
       // check header or url parameters or post parameters for token
       var token = req.body.token || req.query.token || req.headers['x-access-token'];
       if (token) {
-        jwt.verify(token, app.setting.token_secret, function(err, decoded) {
+        jwt.verify(token, app.setting.token_secret, function(err, value) {
           if (err) {
+            debug('token verify error:', err);
             return res.json({ success: false, message: 'Invalid token' });
           } else {
-            debug('api token check - decoded token value:', decoded);
-            req.decoded = decoded; // save decoded info in req
-            next();
+            debug('api token check - decoded token value:', value);
+            app.module.user.data.getByField(req, res, 'username', value.user, function(error, docs, info) {
+              var user = docs && docs[0] || null;
+              debug('token user found:', user);
+              if (user) {
+                req.user = user;
+                next();
+              } else {
+                return res.json({ success: false, message: 'No user found for token' });
+              }
+            })
           }
         });
       } else {
@@ -42,7 +51,14 @@ module.exports = function(app) {
 
   // make sure logged in user has access to route
   block.data.checkAccess = function(req, res, next) {
-    
+    if (req.user) {
+      next();
+    } else {
+      return res.status(403).send({
+          success: false,
+          message: 'No user info found'
+      });
+    }
   };
 
   // site admin page

@@ -90,6 +90,9 @@ function setup(cbSetup) {
   apiRoutes.use(function(req, res, next) {
       app.module.admin.data.checkToken(req, res, next);
   });
+  apiRoutes.use(function(req, res, next) {
+      app.module.admin.data.checkAccess(req, res, next);
+  });
   app.server.get('/data/*', apiRoutes);
 
   // setup database connection

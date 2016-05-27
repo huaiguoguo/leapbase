@@ -209,37 +209,8 @@ module.exports = function(app) {
           res.redirect(nextUrl);
         }
       });
-
-      /*
-      var page = app.getPage(req, {});
-      page.title = 'User Signup';
-      res.render('user/signup', { page:page });
-      */
-
     }
 
-
-    /*
-    var parameter = tool.getReqParameter(req);
-    var invite_code = parameter.invite_code;
-    if (invite_code != app.setting.invite.code) {
-      var message = 'Signup failed - incorrect invite code';
-      app.renderInfoPage(new Error(message), null, { message:message }, req, res);
-    } else {
-      debug('passed invite code check, add user');
-      app.renderInfoPage(null, null, { message:'add user'}, req, res);
-
-      block.data.addUser(req, res, null, function(error, docs, info) {
-        if (error) {
-          app.renderInfoPage(error, docs, info, req, res);
-        } else {
-          var user = docs && docs[0];
-          var nextUrl = parameter.redirect || '/';
-          res.redirect(nextUrl);
-        }
-      });
-    }
-    */
   };
 
   block.page.logout = function(req, res) {

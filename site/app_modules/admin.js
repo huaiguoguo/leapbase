@@ -51,7 +51,8 @@ module.exports = function(app) {
 
   // make sure logged in user has access to route
   block.data.checkAccess = function(req, res, next) {
-    if (req.user) {
+    var user = req.session && req.session.user || req.user;
+    if (user) {
       next();
     } else {
       return res.status(403).send({

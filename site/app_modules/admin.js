@@ -8,8 +8,10 @@ module.exports = function(app) {
   var module_name = 'admin';
   var block = {
     app: app,
+    role: 'admin',
     model: null
   };
+
   block.data = tool.object(require('basedata')(app, module_name));
   block.page = tool.object(require('basepage')(app, module_name, block.data));
 
@@ -53,7 +55,19 @@ module.exports = function(app) {
   block.data.checkAccess = function(req, res, next) {
     var user = req.session && req.session.user || req.user;
     if (user) {
-      next();
+      var module_name_in_url = req.url.split('/')[2];
+      var module_in_url = module_name_in_url && app.module[module_name_in_url];
+      var module_role_name = module_in_url && module_in_url.role || '';
+      debug('req url info:', req.url, ', module role:', module_role_name);
+      debug('user info:', user.username, ', roles:', user.roles);
+      if (user.roles.indexOf(module_role_name) >= 0) {
+        next(); // user's roles include url's corresponding module role name
+      } else {
+        return res.status(403).send({
+            success: false,
+            message: 'User access is denied'
+        });
+      }
     } else {
       return res.status(403).send({
           success: false,

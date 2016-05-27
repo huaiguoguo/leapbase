@@ -7,7 +7,8 @@ module.exports = function(app) {
 
   var module_name = 'role';
   var block = {
-    app: app
+    app: app,
+    role: 'admin',
   };
 
   block.data = tool.object(require('basedata')(app, module_name));

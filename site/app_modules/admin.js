@@ -55,8 +55,8 @@ module.exports = function(app) {
   block.data.checkAccess = function(req, res, next) {
     var user = req.session && req.session.user || req.user;
     if (user) {
-      var module_name_in_url = req.url.split('/')[2];
-      var module_in_url = module_name_in_url && app.module[module_name_in_url];
+      var module_name = tool.getModuleFromUrl(req.url);
+      var module_in_url = module_name && app.module[module_name];
       var module_role_name = module_in_url && module_in_url.role || '';
       debug('req url info:', req.url, ', module role:', module_role_name);
       debug('user info:', user.username, ', roles:', user.roles);

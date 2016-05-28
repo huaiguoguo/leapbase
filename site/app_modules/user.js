@@ -7,7 +7,8 @@ module.exports = function(app) {
 
   var module_name = 'user';
   var block = {
-    app: app
+    app: app,
+    role: 'user'
   };
 
   block.data = tool.object(require('basedata')(app, module_name));
@@ -87,7 +88,7 @@ module.exports = function(app) {
     var parameter = tool.getReqParameter(req);
     // user email is lower case
     parameter.email = parameter.email.toLowerCase();
-    parameter.roles = parameter.role ? [parameter.role] : [];
+    parameter.roles = parameter.roles ? parameter.roles : [];
     debug('add user:', parameter);
     tool.setReqParameter(req, parameter);
     var condition = {email: parameter.email};
@@ -184,22 +185,22 @@ module.exports = function(app) {
     debug('user signup posted - parameter:', parameter);
 
     var invite_code = parameter.invite_code;
-    var user_role = '';
+    var user_roles = [];
     switch (parameter.invite_code) {
       case app.setting.invite_code_user:
-        user_role = 'user';
+        user_roles = ['user'];
         break;
       case app.setting.invite_code_admin:
-        user_role = 'admin';
+        user_roles = ['admin', 'user'];
         break;
     }
 
-    if (user_role === '') {
+    if (user_roles.length == 0) {
       debug('entered invite code, ' + invite_code + ', does not match');
       var message = 'Incorrect invite code';
       app.renderInfoPage(new Error('Signup Error'), null, { message:message }, req, res);
     } else {
-      tool.setReqParameter(req, { role:user_role });
+      tool.setReqParameter(req, { roles:user_roles });
       block.data.addUser(req, res, null, function(error, docs, info) {
         if (error) {
           app.renderInfoPage(error, docs, info, req, res);

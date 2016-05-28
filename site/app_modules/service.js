@@ -6,7 +6,8 @@ module.exports = function(app) {
 
   var module_name = 'service';
   var block = {
-    group: 'app',
+    app: app,
+    role: 'user',
     model: null
   };
 
